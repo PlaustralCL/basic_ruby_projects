@@ -6,35 +6,24 @@ def shift_string(str, key)
   working_array.each do |ltr|
     ltr = ltr.ord
     if ltr.between?(97, 122) # a to z
-      if key >= 0 # 0 is no shift
-        shifted_array.push(shift_positive(ltr, key))
-      else
-        shifted_array.push(shift_negative(ltr, key))
+      if key >= 0 # A key of 0 means no shift. Doesn't matter where it goes
+        if (ltr + key) > 122
+          ltr = (ltr + key) - 26
+        else
+          ltr = ltr + key
+        end
+      else # negative keys
+        positive_key = key.abs
+        if (ltr - positive_key) < 97
+          ltr = (ltr - positive_key) + 26
+        else
+          ltr = ltr - positive_key
+        end
       end
-    else
-      shifted_array.push(ltr)
     end
+    shifted_array.push(ltr)
   end
   shifted_array.map {|num| num.chr}
-end
-
-
-def shift_positive(ltr, key)
-  if (ltr + key) > 122
-    (ltr + key) - 26
-  else
-    ltr + key
-  end
-end
-
-
-def shift_negative(ltr, key)
-  key = key.abs
-  if (ltr - key) < 97
-    (ltr - key) + 26
-  else
-    ltr - key
-  end
 end
 
 

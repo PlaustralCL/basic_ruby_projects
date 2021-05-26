@@ -47,7 +47,7 @@ def validate_case(user_string, shifted_array)
   # characters in the shifted_array and changes the shifted_array as needed
   # to match
   # @param user_string [String] the original string from the user
-  # @ param shifted_array [Array] Array containing the characters after shifting
+  # @param shifted_array [Array] Array containing the characters after shifting
   shifted_array.each_with_index do |chr, index|
     if user_string[index] == user_string[index].upcase
       chr.upcase!
@@ -91,4 +91,4 @@ end
   user_key = normalize_key(user_key)
   encrpyted_array = shift_string(user_string, user_key)
   encrpyted_array = validate_case(user_string, encrpyted_array)
-  puts "The encrypted string = #{encrpyted_array.join("")}"
+  puts "The encrypted string: #{encrpyted_array.join("")}"

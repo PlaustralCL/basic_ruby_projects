@@ -1,21 +1,28 @@
-require 'pry'
-
 def shift_string(str, key)
+  a_ascii = 97 # ascii/ unicode value for lowercase a
+  z_ascii = 122 # ascii/ unicode value for lowercase z
+  alphabet_length = 26
   shifted_array = []
   working_array = str.downcase.split("")
   working_array.each do |ltr|
     ltr = ltr.ord
-    if ltr.between?(97, 122) # a to z
-      if key >= 0 # A key of 0 means no shift. Doesn't matter where it goes
-        if (ltr + key) > 122
-          ltr = (ltr + key) - 26
+    # check if the character is a letter. Non-letter characters are addded
+    #   straight to the shifted array
+    if ltr.between?(a_ascii, z_ascii)
+      # positive keys
+      if key >= 0 
+        if (ltr + key) > z_ascii 
+          # wrap around z back to a
+          ltr = (ltr + key) - alphabet_length
         else
           ltr = ltr + key
         end
-      else # negative keys
+      # negative keys
+      else 
         positive_key = key.abs
-        if (ltr - positive_key) < 97
-          ltr = (ltr - positive_key) + 26
+        if (ltr - positive_key) < a_ascii
+          # wrap around a back to z
+          ltr = (ltr - positive_key) + alphabet_length 
         else
           ltr = ltr - positive_key
         end
@@ -68,16 +75,8 @@ def normalize_key(key)
   end
 end
 
-# to lower case
-# normalize key
-# apply cipher
-#   use ascii numbers (str.ord)
-#   wrap if necessary
-#   allow for negative key
-# restore case
-#   check for puncuation and numbers
 
-def main
+# Main code
   input_array = get_input()
   user_string = input_array[0]
   user_key = input_array[1]
@@ -85,15 +84,3 @@ def main
   encrpyted_array = shift_string(user_string, user_key)
   encrpyted_array = validate_case(user_string, encrpyted_array)
   puts "The encrypted string = #{encrpyted_array.join("")}"
-  
-end
-
-
-# call main function
-main
-
-
-
-
-
-

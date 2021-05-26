@@ -1,4 +1,12 @@
 def shift_string(str, key)
+  # Shifts the string based on the key. The string is converted to an array and 
+  # then each character is converted to the ascii number value. The key is 
+  # then added (or subtracted) to the ascii number to give a new value. At the
+  # end, the ascii numbers are converted back to letters. An array containing
+  # shifted characters is returned.
+  # @param str {String}
+  # @param key {Integer}
+  # @return {Array}
   a_ascii = 97 # ascii/ unicode value for lowercase a
   z_ascii = 122 # ascii/ unicode value for lowercase z
   alphabet_length = 26

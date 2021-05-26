@@ -58,17 +58,16 @@ def get_input
 end
 
 def normalize_key(key)
-  positive_key = key.abs
+  # Normalizes the key to a number between 1 and 26
+  # @param key [Integer] the key value
+  # @return [Integer] value between 1 and 26 or -1 and -26
+  positive_key = key.abs # the % function doesn't work well with negative numbers
   if positive_key > 26
     positive_key = positive_key % 26 
   end
 
   if key < 0
     key = 0 - positive_key
-
-    binding.pry
-    
-    key
   else
     key = positive_key
   end

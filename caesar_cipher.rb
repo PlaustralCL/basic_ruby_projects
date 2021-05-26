@@ -1,3 +1,5 @@
+require 'pry'
+
 def shift_string(str, key)
   shifted_array = []
   working_string = str.downcase.split("")
@@ -55,10 +57,29 @@ def get_input
   input_array = [user_string, user_key]
 end
 
+def normalize_key(key)
+  positive_key = key.abs
+  if positive_key > 26
+    positive_key = positive_key % 26 
+  end
+
+  if key < 0
+    key = 0 - positive_key
+
+    binding.pry
+    
+    key
+  else
+    key = positive_key
+  end
+end
+
 # to lower case
+# normalize key
 # apply cipher
 #   use ascii numbers (str.ord)
 #   wrap if necessary
+#   allow for negative key
 # restore case
 #   check for puncuation and numbers
 
@@ -66,6 +87,7 @@ def main
   input_array = get_input()
   user_string = input_array[0]
   user_key = input_array[1]
+  user_key = normalize_key(user_key)
   encrpyted_array = shift_string(user_string, user_key)
   encrpyted_array = validate_case(user_string, encrpyted_array)
   puts "The encrypted string = #{encrpyted_array.join("")}"

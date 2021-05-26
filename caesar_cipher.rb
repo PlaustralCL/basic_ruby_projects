@@ -2,14 +2,14 @@ require 'pry'
 
 def shift_string(str, key)
   shifted_array = []
-  working_string = str.downcase.split("")
-  working_string.each do |ltr|
+  working_array = str.downcase.split("")
+  working_array.each do |ltr|
     ltr = ltr.ord
-    if ltr.between?(97, 122)
-      if (ltr + key) > 122
-        shifted_array.push((ltr + key) - 26)
+    if ltr.between?(97, 122) # a to z
+      if key >= 0 # 0 is no shift
+        shifted_array.push(shift_positive(ltr, key))
       else
-        shifted_array.push(ltr + key)
+        shifted_array.push(shift_negative(ltr, key))
       end
     else
       shifted_array.push(ltr)
@@ -17,6 +17,26 @@ def shift_string(str, key)
   end
   shifted_array.map {|num| num.chr}
 end
+
+
+def shift_positive(ltr, key)
+  if (ltr + key) > 122
+    (ltr + key) - 26
+  else
+    ltr + key
+  end
+end
+
+
+def shift_negative(ltr, key)
+  key = key.abs
+  if (ltr - key) < 97
+    (ltr - key) + 26
+  else
+    ltr - key
+  end
+end
+
 
 def validate_case(user_string, shifted_array)
   # Compares the case of the characters in the orignal user_string to
@@ -31,20 +51,6 @@ def validate_case(user_string, shifted_array)
   end
 end
 
-def convert_to_number(ltr)
-  # Receives a string and converts it to an interger representing the ascii 
-  # decimal value.
-  # @param ltr [string] single character to convert
-  # @return [integer] ascii code of ltr
-  ltr.ord
-end
-
-def convert_to_letter(num)
-  # Converts a number to its encoding 
-  # @ param num [integer] 
-  # @ return [string] string representing ascii encoding
-  num.chr
-end
 
 def get_input
   puts "This program will encrypt a string using a Caesar Cipher and the numeric key you provide."

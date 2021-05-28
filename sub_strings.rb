@@ -5,12 +5,25 @@ end
 
 
 def substrings(str, dictionary)
-  str = str.split(" ")
-  dictionary.reduce({}) do |memo, word|
-    
-    if str.to_s.include?(word)
-      memo[word] = 1
+  array_from_str = str.split(" ")
+  dictionary.reduce({}) do |memo, dict_word|
+    array_from_str.each do |str_word|
+
+      if str_word.include?(dict_word)
+        if memo.has_key?(dict_word)
+          memo[dict_word] += 1
+        else
+          memo[dict_word] = 1
+        end
+  
+        
+      end
+
+
+
     end
+    
+  
     memo
 
 
@@ -25,7 +38,7 @@ end
 
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
 # user_input = get_input()
-puts substrings("below", dictionary)
+puts substrings("below low", dictionary)
 
 
 

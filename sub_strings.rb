@@ -9,7 +9,7 @@ def substrings(str, dictionary)
   dictionary.reduce({}) do |memo, dict_word|
     array_from_str.each do |str_word|
 
-      if str_word.include?(dict_word)
+      if str_word.downcase.include?(dict_word)
         if memo.has_key?(dict_word)
           memo[dict_word] += 1
         else
@@ -38,7 +38,7 @@ end
 
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
 # user_input = get_input()
-puts substrings("below low", dictionary)
+puts substrings("Howdy partner, sit down! How's it going?", dictionary)
 
 
 

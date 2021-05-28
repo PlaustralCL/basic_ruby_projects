@@ -8,11 +8,12 @@ def substrings(str, dictionary)
   dictionary.reduce({}) do |memo, dict_word|
     array_from_str.each do |str_word|
       if str_word.downcase.include?(dict_word)
-        if memo.has_key?(dict_word)
-          memo[dict_word] += 1
-        else
-          memo[dict_word] = 1
-        end
+        memo.has_key?(dict_word) ? memo[dict_word] += 1 : memo[dict_word] = 1
+        # if memo.has_key?(dict_word)
+        #   memo[dict_word] += 1
+        # else
+        #   memo[dict_word] = 1
+        # end
       end
     end
     # memo must be returned to maintain the hash

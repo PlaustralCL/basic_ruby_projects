@@ -4,15 +4,14 @@ def stock_picker(stock_prices)
   profit = 0
   buy_day = nil
   sell_day = nil
-  stock_prices.each_index do |index_i|
-    stock_prices.each_index do |index_j|
-      if (stock_prices[index_j] - stock_prices[index_i] > profit) && (index_j > index_i)
-        profit = stock_prices[index_j] - stock_prices[index_i]
-        sell_day = index_j
-        buy_day = index_i
+  stock_prices.each_index do |index_buy|
+    stock_prices.each_index do |index_sell|
+      if (stock_prices[index_sell] - stock_prices[index_buy] > profit) && (index_sell > index_buy)
+        profit = stock_prices[index_sell] - stock_prices[index_buy]
+        sell_day = index_sell
+        buy_day = index_buy
       end
     end
-    
   end
   stock_trade_info = {profit: profit, buy_day: buy_day, sell_day: sell_day}
 end

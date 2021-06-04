@@ -25,7 +25,7 @@ def shift_string(str, key)
     end
     shifted_array.push(ltr)
   end
-  shifted_array.map { |num| num.chr }
+  shifted_array.map(&:chr)
 end
 
 # Shifts each letter according to the key, accounting for wrapping from z to a

@@ -80,10 +80,20 @@ def normalize_key(key)
 end
 
 # Main code
-input_array = obtain_input
-user_string = input_array[0]
-user_key = input_array[1]
-user_key = normalize_key(user_key)
-encrpyted_array = shift_string(user_string, user_key)
-encrpyted_array = validate_case(user_string, encrpyted_array)
-puts "The encrypted string: #{encrpyted_array.join('')}"
+
+# Commented out getting user input to simplify testing
+# input_array = obtain_input
+# user_string = input_array[0]
+# user_key = input_array[1]
+
+test_data = [['What a string!', 5], ['Bmfy f xywnsl!', -5]]
+test_data.each do |input_array|
+  user_string = input_array[0]
+  user_key = input_array[1]
+  puts "The test string is '#{user_string}'' and the key is #{user_key}."
+  user_key = normalize_key(user_key)
+  encrpyted_array = shift_string(user_string, user_key)
+  encrpyted_array = validate_case(user_string, encrpyted_array)
+  puts "The encrypted string: #{encrpyted_array.join('')}"
+  puts ''
+end

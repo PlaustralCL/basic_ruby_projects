@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# constants
+A_ASCII = 97 # ascii/ unicode value for lowercase a
+Z_ASCII = 122 # ascii/ unicode value for lowercase z
+ALPHABET_LENGTH = 26
+
 # Shifts the string based on the key. The string is converted to an array and
 # then each character is converted to the ascii number value. The key is
 # then added (or subtracted) to the ascii number to give a new value. At the
@@ -9,38 +14,45 @@
 # @param key {Integer}
 # @return {Array}
 def shift_string(str, key)
-  a_ascii = 97 # ascii/ unicode value for lowercase a
-  z_ascii = 122 # ascii/ unicode value for lowercase z
-  alphabet_length = 26
   shifted_array = []
   working_array = str.downcase.split('')
   working_array.each do |ltr|
     ltr = ltr.ord
     # check if the character is a letter. Non-letter characters are addded
     #   straight to the shifted array
-    if ltr.between?(a_ascii, z_ascii)
-      # positive keys
-      if key >= 0
-        if (ltr + key) > z_ascii
-          # wrap around z back to a
-          ltr = (ltr + key) - alphabet_length
-        else
-          ltr = ltr + key
-        end
-      # negative keys
-      else
-        positive_key = key.abs
-        if (ltr - positive_key) < a_ascii
-          # wrap around a back to z
-          ltr = (ltr - positive_key) + alphabet_length
-        else
-          ltr = ltr - positive_key
-        end
-      end
+    if ltr.between?(A_ASCII, Z_ASCII)
+      ltr = key >= 0 ? shift_positive_keys(key, ltr) : shift_negative_keys(key, ltr)
     end
     shifted_array.push(ltr)
   end
   shifted_array.map { |num| num.chr }
+end
+
+# Shifts each letter according to the key, accounting for wrapping from z to a
+# @param key [String] The key used for shifting
+# @param ltr [String] The letter to be shifted
+# @return [String] The shifted letter
+def shift_positive_keys(key, ltr)
+  if (ltr + key) > Z_ASCII
+    # wrap around z back to a
+    (ltr + key) - ALPHABET_LENGTH
+  else
+    ltr + key
+  end
+end
+
+# Shifts each letter according to the key, accounting for wrapping from a to z
+# @param key [String] The key used for shifting
+# @param ltr [String] The letter to be shifted
+# @return [String] The shifted letter
+def shift_negative_keys(key, ltr)
+  positive_key = key.abs
+  if (ltr - positive_key) < A_ASCII
+    # wrap around a back to z
+    (ltr - positive_key) + ALPHABET_LENGTH
+  else
+    ltr - positive_key
+  end
 end
 
 # Compares the case of the characters in the orignal user_string to
@@ -72,11 +84,7 @@ def normalize_key(key)
   positive_key = key.abs # the % function doesn't work well with negative numbers
   positive_key = positive_key % 26 if positive_key > 26
 
-  if key.negative?
-    0 - positive_key
-  else
-    positive_key
-  end
+  key.negative? ? 0 - positive_key : positive_key
 end
 
 # Main code
@@ -90,7 +98,7 @@ test_data = [['What a string!', 5], ['Bmfy f xywnsl!', -5]]
 test_data.each do |input_array|
   user_string = input_array[0]
   user_key = input_array[1]
-  puts "The test string is '#{user_string}'' and the key is #{user_key}."
+  puts "The test string is '#{user_string}' and the key is #{user_key}."
   user_key = normalize_key(user_key)
   encrpyted_array = shift_string(user_string, user_key)
   encrpyted_array = validate_case(user_string, encrpyted_array)

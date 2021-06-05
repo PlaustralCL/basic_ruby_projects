@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# Loop through each element in the array. Starts at element 1 to prevent
-# going off the end of the array. Compares i to i - 1. Since the largest
-# unsorted value ends up at the proper positon on the right after each
-# complete pass through the array, the length of the loop can be shortened
-# by one each time it is used.
+# Loop through each element in the array. The inner, i, loop goes over each
+# element in the array and performs a swap if necessary. The outer, k, loop
+# determines how many times the inner loop needs to be performed.
 # @param arr [Array] Array of numbers to be sorted
 # @param sorted [Boolean] Do no use. Dummy parameter to reduce lines in the
 #   body of the method. Default value is true.
+# @return [Array] Sorted array
+# rubocop: disable Metrics/MethodLength
 def bubble_sort(arr, sorted: true)
   arr.each_index do |k|
     arr.each_index do |i|
@@ -18,13 +18,6 @@ def bubble_sort(arr, sorted: true)
         sorted = false
       end
     end
-
-    # for i in 1..(arr.length - k)
-    #   if arr[i] < arr[i - 1]
-    #     arr[i], arr[i - 1] = arr[i - 1], arr[i]
-    #     sorted = false
-    #   end
-    # end
 
     break if sorted
   end

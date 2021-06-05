@@ -12,12 +12,21 @@ def bubble_sort(arr, sorted: true)
   arr.each_index do |k|
     k += 1
 
-    for i in 1..(arr.length - k)
-      if arr[i] < arr[i - 1]
-        arr[i], arr[i - 1] = arr[i - 1], arr[i]
+    arr.each_index do |i|
+      break if i == (arr.length - k)
+
+      if arr[i] > arr[i + 1]
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
         sorted = false
       end
     end
+
+    # for i in 1..(arr.length - k)
+    #   if arr[i] < arr[i - 1]
+    #     arr[i], arr[i - 1] = arr[i - 1], arr[i]
+    #     sorted = false
+    #   end
+    # end
 
     break if sorted
   end

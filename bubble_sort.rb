@@ -7,9 +7,12 @@ test_array = [4, 3, 78, 2, 0, 2]
 # unsorted value ends up at the proper positon on the right after each
 # complete pass through the array, the length of the loop can be shortened
 # by one each time it is used.
+# @param arr [Array] Array of numbers to be sorted
+# @param sorted [Boolean] Do no use. Dummy parameter to reduce lines in the
+#   body of the method. Default vaulue is true.
 def bubble_sort(arr, sorted: true)
-  # Number of times to go through the entire array
-  for k in 1..(arr.length - 1)
+  arr.each_index do |k|
+    k += 1
 
     for i in 1..(arr.length - k)
       if arr[i] < arr[i - 1]
@@ -19,7 +22,6 @@ def bubble_sort(arr, sorted: true)
     end
 
     break if sorted
-
   end
   # Return value
   arr

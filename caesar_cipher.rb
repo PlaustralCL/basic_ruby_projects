@@ -21,7 +21,7 @@ def shift_string(str, key)
     # check if the character is a letter. Non-letter characters are addded
     #   straight to the shifted array
     if ltr.between?(A_ASCII, Z_ASCII)
-      ltr = key >= 0 ? shift_positive_keys(key, ltr) : shift_negative_keys(key, ltr)
+      ltr = key.negative? ? shift_negative_keys(key, ltr) : shift_positive_keys(key, ltr)
     end
     shifted_array.push(ltr)
   end

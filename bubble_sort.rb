@@ -27,11 +27,27 @@ def bubble_sort(arr, sorted: true)
   arr
 end
 
-puts "Original Array: #{test_array}"
-puts "Sorted Array #{bubble_sort(test_array)}"
-puts ''
-puts 'Original Array: [9, 8, 7, 6, 5, 4]'
-puts "Sorted Array #{bubble_sort([9, 8, 7, 6, 5, 4])}"
-puts ''
-puts 'Original Array: [1, 2, 3, 4, 5]'
-puts "Sorted Array #{bubble_sort([1, 2, 3, 4, 5])}"
+test_data = [
+  { test_array: [4, 3, 78, 2, 0, 2], expected: [0, 2, 2, 3, 4, 78] },
+  { test_array: [9, 8, 7, 6, 5, 4], expected: [4, 5, 6, 7, 8, 9] },
+  { test_array: [1, 2, 3, 4, 5], expected: [1, 2, 3, 4, 5] }
+]
+
+test_data.each_with_index do |obj, _index|
+  expected = obj[:expected]
+  result = bubble_sort(obj[:test_array])
+  if expected == result
+    puts "For #{obj[:test_array]}, expected #{expected} and got #{result}"
+  else
+    puts "ERROR! For #{obj[:test_array]}, expected #{expected} and got #{result}"
+  end
+end
+
+# puts "Original Array: #{test_array}"
+# puts "Sorted Array #{bubble_sort(test_array)}"
+# puts ''
+# puts 'Original Array: [9, 8, 7, 6, 5, 4]'
+# puts "Sorted Array #{bubble_sort([9, 8, 7, 6, 5, 4])}"
+# puts ''
+# puts 'Original Array: [1, 2, 3, 4, 5]'
+# puts "Sorted Array #{bubble_sort([1, 2, 3, 4, 5])}"

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-test_array = [4, 3, 78, 2, 0, 2]
-
 # Loop through each element in the array. Starts at element 1 to prevent
 # going off the end of the array. Compares i to i - 1. Since the largest
 # unsorted value ends up at the proper positon on the right after each
@@ -9,7 +7,7 @@ test_array = [4, 3, 78, 2, 0, 2]
 # by one each time it is used.
 # @param arr [Array] Array of numbers to be sorted
 # @param sorted [Boolean] Do no use. Dummy parameter to reduce lines in the
-#   body of the method. Default vaulue is true.
+#   body of the method. Default value is true.
 def bubble_sort(arr, sorted: true)
   arr.each_index do |k|
     k += 1

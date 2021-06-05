@@ -10,10 +10,8 @@
 #   body of the method. Default value is true.
 def bubble_sort(arr, sorted: true)
   arr.each_index do |k|
-    k += 1
-
     arr.each_index do |i|
-      break if i == (arr.length - k)
+      break if i == (arr.length - (k + 1))
 
       if arr[i] > arr[i + 1]
         arr[i], arr[i + 1] = arr[i + 1], arr[i]
